@@ -4,11 +4,6 @@ VALUES
   ('Jane', 'Doe', '1992-03-15', 'Female'),
   ('Bob', 'Smith', '1985-05-20', 'Male');
 
-INSERT INTO people (human_id)
-VALUES
-  (1),
-  (2),
-  (3);
 
 INSERT INTO action_types (type)
 VALUES
@@ -62,6 +57,6 @@ VALUES
 
 INSERT INTO actions (action_type_id, performer_id, location_id, time)
 VALUES
-  (1, 1, 1, '2023-04-15 10:00:00'),
-  (2, 1, 2, '2023-04-15 11:00:00'),
-  (3, 1, 1, '2023-04-15 14:00:00');
+  (1, 10, 1, '2023-04-15 10:00:00'),
+  (2, 11, 2, '2023-04-15 11:00:00'),
+  (3, 12, 1, '2023-04-15 14:00:00');
