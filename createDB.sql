@@ -62,3 +62,17 @@ CREATE TABLE actions (
     time TIMESTAMP
 );
 
+CREATE TABLE object_subtypes (
+    id SERIAL PRIMARY KEY,
+    subtype VARCHAR(128)
+);
+
+CREATE TABLE object_location_types (
+    id SERIAL PRIMARY KEY,
+    type VARCHAR(128)
+);
+
+CREATE TABLE object_action_types (
+    id SERIAL PRIMARY KEY,
+    type VARCHAR(128)
+);
