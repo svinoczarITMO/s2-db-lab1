@@ -60,3 +60,30 @@ VALUES
   (1, 10, 1, '2023-04-15 10:00:00'),
   (2, 11, 2, '2023-04-15 11:00:00'),
   (3, 12, 1, '2023-04-15 14:00:00');
+
+insert into object_subtypes (id, subtype)
+values
+    (1, 'automatic door'),
+    (2, 'sliding door'),
+    (3, 'casual door'),
+    (4, 'container'),
+    (5, 'box'),
+    (6, 'apparatus'),
+    (7, 'furnace');
+
+insert into object_location_types (id, type)
+values
+    (1, 'Entrance to the factory'),
+    (2, 'Entrance to the next room'),
+    (3, 'Entrance to the bedroom'),
+    (4, 'Bedroom'),
+    (5, 'Near the wall'),
+    (6, 'Center of the room');
+
+insert into object_action_types (id, type)
+values
+    (1, 'None'),
+    (2, 'Sliding'),
+    (3, 'Buzzes'),
+    (4, 'Humming');
+
