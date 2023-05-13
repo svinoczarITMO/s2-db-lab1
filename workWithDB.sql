@@ -47,3 +47,31 @@ update objects set object_subtype = 6, location = 6, action = 3 where id = 6;
 update objects set object_subtype = 7, location = 5, action = 4 where id = 7;
 
 delete from objects where id >= 22;
+
+------------------------------------------------------------------------
+
+select humans.first_name, action_types.type, location_types.type
+from humans join actions on humans.id = actions.performer_id
+    join action_types on actions.action_type_id = action_types.id
+    join locations on actions.location_id = locations.id
+    join location_types on locations.location_type_id = location_types.id;
+
+insert into actions (action_type_id, performer_id, location_id, time)
+values
+  (2, 10, 3, '2023-04-29 10:00:00'),
+  (1, 11, 3, '2023-04-29 11:00:00'),
+  (3, 11, 3, '2023-04-29 11:00:00');
+
+select * from actions;
+
+create view more_than_two as
+select humans.first_name, count(*) as actions_count
+from humans join actions on humans.id = actions.performer_id
+group by performer_id, humans.first_name
+having count(*) > 2;
+
+select * from more_than_two;
+
+insert into more_than_two (first_name, actions_count)
+values
+    ("Alice", 100);
