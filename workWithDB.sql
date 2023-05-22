@@ -9,6 +9,7 @@ select * from object_location_types;
 select * from object_subtypes;
 select * from object_types;
 select * from objects;
+select * from runners;
 
 ALTER TABLE actions
 ADD CONSTRAINT fk_performer
@@ -64,14 +65,49 @@ values
 
 select * from actions;
 
-create view more_than_two as
-select humans.first_name, count(*) as actions_count
-from humans join actions on humans.id = actions.performer_id
-group by performer_id, humans.first_name
-having count(*) > 2;
+create or replace view more_than_two as
+select humans.first_name --,1 as actions_count
+from humans join actions on humans.id = actions.performer_id;
+-- group by performer_id, humans.first_name
+-- having count(*) > 2;
+
+drop view more_than_two;
+
 
 select * from more_than_two;
 
-insert into more_than_two (first_name, actions_count)
+insert into more_than_two (first_name)
 values
-    ("Alice", 100);
+    ('Alice');
+
+
+--------------------------------------------------
+create table runners (
+    id serial primary key,
+    performer_id serial references humans(id),
+    location_id serial references locations(id);
+
+insert into actions (action_type_id, performer_id, location_id)
+values (
+        2, 12, 1
+        );
+
+create or replace function log_runners()
+returns trigger as $$
+begin
+  IF new.action_type_id = 2 then
+    insert into runners (performer_id, location_id) values (new.performer_id, new.location_id);
+  end if;
+  return new;
+end;
+$$ language plpgsql;
+
+create trigger add_runner_to_list
+after insert on actions
+for each row
+execute function log_runners();
+
+select * from actions;
+select * from runners;
+
+
